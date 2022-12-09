@@ -21,7 +21,10 @@ if not os.path.exists(args.path):
 
 # Se afiseaza confirmarea daca optiunea --force nu a fost adaugata
 if not args.force:
-    confirm = input(f"rm: remove regular file '{args.path}'? ")
+    if os.path.isdir(args.path):
+        confirm = input(f"rm: remove folder and its subitems '{args.path}'? ")
+    if os.path.isfile(args.path):
+        confirm = input(f"rm: remove file '{args.path}'? ")
     if confirm != "y":
         print("rm: aborting")
         exit(0)
